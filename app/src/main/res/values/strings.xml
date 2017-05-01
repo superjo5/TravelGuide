@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TravelGuide</string>
+    <string name="head">สถานที่ท่องเที่ยว</string>
+    <string name="user">User :</string>
+    <string name="pass">Password :</string>
+    <string name="login">Login</string>
+
+
+</resources>
