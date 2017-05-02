@@ -2,6 +2,7 @@ package sdu.wirattapong.travelguide;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -34,6 +35,32 @@ public class TravelTABLE {
         objContentValues.put(COLUMN_PRICE, strPrice);
 
         return readSqLiteDatabase.insert(TRAVEL_TABLE, null, objContentValues);
+    }
+
+    public String[] readAllTravel(int intColumn) {
+        String[] strReadAll = null;
+        Cursor objCursor = readSqLiteDatabase.query(TRAVEL_TABLE,
+                new String[]{COLUMN_ID_TRAVEL, COLUMN_TRAVEL, COLUMN_SOURCE, COLUMN_PRICE},
+                null, null, null, null, null);
+        if (objCursor != null) {
+            objCursor.moveToFirst();
+            strReadAll = new String[objCursor.getCount()];
+            for (int i = 0; i<= objCursor.getCount(); i++) {
+                switch (intColumn) {
+                    case 1:
+                        strReadAll[i] = objCursor.getString(objCursor.getColumnIndex(COLUMN_TRAVEL));
+                        break;
+                    case 2:
+                        strReadAll[i] = objCursor.getString(objCursor.getColumnIndex(COLUMN_SOURCE));
+                        break;
+                    default:
+                        strReadAll[i] = objCursor.getString(objCursor.getColumnIndex(COLUMN_PRICE));
+                        break;
+                }
+                objCursor.moveToNext();
+            }
+        }
+        return strReadAll;
     }
 
 }

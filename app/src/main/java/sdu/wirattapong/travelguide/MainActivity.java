@@ -1,6 +1,7 @@
 package sdu.wirattapong.travelguide;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
@@ -143,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
     }//Synchronize JSON to SQLite
 
     private void initialWidget() {
-        userEditText = (EditText) findViewById(R.id.editText);
-        passwordEditText = (EditText) findViewById(R.id.editText2);
+        userEditText = (EditText) findViewById(R.id.editText2);
+        passwordEditText = (EditText) findViewById(R.id.editText);
 
     }//Initial Widget
 
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
             String[] strMyResult = objUserTABLE.searchUserPassword(strUser);
             if (strPassword.equals(strMyResult[2])) {
                 //Password True
-                welcomeDialog();
+                welcomeDialog(strUser);
             } else {
                 //Password False
                 errorDialog("Password False", "Please Try Again Password False");
@@ -193,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         }
     } //checkUserPassword
 
-    private void welcomeDialog(String strName) {
+    private void welcomeDialog(final String strName) {
         AlertDialog.Builder objBuilder = new AlertDialog.Builder(this);
         //objBuilder.setIcon(R.drawable.travelguide);
         objBuilder.setTitle("Welcome");
@@ -202,7 +203,10 @@ public class MainActivity extends AppCompatActivity {
         objBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
+                Intent objIntent = new Intent(MainActivity.this, OrderActivity.class);
+                objIntent.putExtra("Officer", strName);
+                startActivity(objIntent);
+                finish();
             }
         });
         objBuilder.show();

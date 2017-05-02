@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     //Explicit
-    private static final String DATABASE_NAME = "JoTravelGuide.db";
+    private static final String DATABASE_NAME = "TravelGuide.db";
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_USER_TABLE = "create table userTABLE " +
             "(_id integer primary key, User text , Password text, Name text);";
